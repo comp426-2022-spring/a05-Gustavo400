@@ -1,7 +1,7 @@
 // Place your server entry point code here
 // Require Express.js
-const coin = require("./modules/coin.js");
-const database = require("./modules/database");
+const coin = require("./src/services/coin.js");
+const database = require("./src/services/database");
 const express = require('express');
 const app = express();
 var argv = require('minimist')(process.argv.slice(2));
