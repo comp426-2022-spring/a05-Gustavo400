@@ -39,7 +39,7 @@ if(argv.debug === "true" || argv.debug === true || argv.deeznuts) {
     console.log("DEBUGGING = TRUE");
     // /app/error test endpoint
     app.get('/app/error/', (req,res) => {
-        database.insertRow(fondle(req, res));
+        database.insertRow(utils.fondle(req, res));
         throw new Error('Error test successful')
     });
 
@@ -49,7 +49,7 @@ if(argv.debug === "true" || argv.debug === true || argv.deeznuts) {
         res.statusMessage = 'OK';
         res.set({"Content-Type": "text/json"});
         res.json(result);
-        database.insertRow(fondle(req, res));
+        database.insertRow(utils.fondle(req, res));
     });
 } else {
     console.log("DEBUGGING = FALSE");
@@ -57,23 +57,7 @@ if(argv.debug === "true" || argv.debug === true || argv.deeznuts) {
 
 
 
-// Grab info to add to database
-function fondle(req, res) {
-    const logdata = {
-        "remoteaddr": req.ip,
-        "remoteuser": req.user,
-        "time": Date.now(),
-        "method": req.method,
-        "url": req.url,
-        "protocol": req.protocol,
-        "httpversion": req.httpVersion,
-        "status": res.statusCode,
-        "referer": req.headers['referer'],
-        "useragent": req.headers['user-agent']
-    }
 
-    return logdata;
-}
 
 app.get('/app/', (req, res) => {
     // Respond with status 200
@@ -84,7 +68,7 @@ app.get('/app/', (req, res) => {
         res.end(res.statusCode+ ' ' +res.statusMessage)
 
         //console.log(fondle(req, res));
-        database.insertRow(fondle(req, res));
+        database.insertRow(utils.fondle(req, res));
 });
 
 //One flip
@@ -95,7 +79,7 @@ app.get('/app/flip/', (req, res) => {
     res.set({"Content-Type": "text/json"});
     res.json(result);
 
-    database.insertRow(fondle(req, res));
+    database.insertRow(utils.fondle(req, res));
 });
 
 //Multiple flips
@@ -109,7 +93,7 @@ app.get('/app/flips/:number', (req, res) => {
     res.set({"Content-Type": "text/json"});
     res.json(result);
 
-    database.insertRow(fondle(req, res));
+    database.insertRow(utils.fondle(req, res));
 });
 
 //Call and flip
@@ -121,12 +105,12 @@ app.get('/app/flip/call/:call', (req, res) => {
     res.set({"Content-Type": "text/json"});
     res.json(result);
 
-    database.insertRow(fondle(req, res));
+    database.insertRow(utils.fondle(req, res));
 });
 
 // Default response for any other request
 app.use(function(req, res){
     res.status(404).send('404 NOT FOUND')
 
-    database.insertRow(fondle(req, res));
+    database.insertRow(utils.fondle(req, res));
 });
