@@ -1,37 +1,22 @@
 // Place your server entry point code here
 // Require Express.js
+const utils = require("./src/utils/utilities.js");
 const coin = require("./src/services/coin.js");
 const database = require("./src/services/database");
 const express = require('express');
-const app = express();
 var argv = require('minimist')(process.argv.slice(2));
 const morgan = require("morgan");
 const fs = require("fs");
 
-//help documentation
-const help = 
-(`server.js [options]
-
---port       Set the port number for the server to listen on. Must be an integer
-            between 1 and 65535.
-
---debug     If set to true, creates endpoints /app/log/access/ which returns
-            a JSON access log from the database and /app/error which throws 
-            an error with the message "Error test successful." Defaults to 
-            false.
-
---log       If set to false, no log files are written. Defaults to true.
-            Logs are always written to database.
-
---help      Return this message and exit.`);
 
 // Check for --help or --h parameters
 if (argv.help || argv.h) {
-    console.log(help);
+    console.log(utils.help);
     process.exit(0);
 }
 
 // Start an app server
+const app = express();
 let portNumber = argv.port ? parseInt(argv.port) : 5000;
 const server = app.listen(portNumber, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%',portNumber))
@@ -42,7 +27,7 @@ const server = app.listen(portNumber, () => {
 // Logging to file if "--log=true"
 if(argv.log !== "false") {
     console.log("LOGGING = TRUE")
-    const accesslog = fs.createWriteStream('access.log', { flags: 'a'});
+    const accesslog = fs.createWriteStream('./data/log/access.log', { flags: 'a'});
     app.use(morgan("combined", { stream: accesslog }));
 
 } else{

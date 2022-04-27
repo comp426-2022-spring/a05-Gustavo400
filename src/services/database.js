@@ -2,7 +2,7 @@
 "use strict";
 //require bettter sqlite
 const Database = require("better-sqlite3");
-const db = new Database("log.db");
+const db = new Database("./data/db/log.db");
 
 //initialize a Database
 function initDatabase() {
