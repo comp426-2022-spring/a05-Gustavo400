@@ -1,13 +1,14 @@
-//throws errors if something messes up
+// Verbose mode
 "use strict";
-//require bettter sqlite
+
+// Importing better-sqlite3 and connecting/create db file
 const Database = require("better-sqlite3");
 const db = new Database("./data/db/log.db");
 
-//initialize a Database
+// Initialize database and create table if doesn't exist
 function initDatabase() {
-    //const stmt = db.prepare(`SELECT NAME FROM sqlite_master WHERE type='table' and name='accesslog';`);
-    const createTable = `CREATE TABLE IF NOT EXISTS accesslog (
+    // const stmt = db.prepare(`SELECT NAME FROM sqlite_master WHERE TYPE='table' AND NAME='accesslog';`);
+    const createTable_stmt = `CREATE TABLE IF NOT EXISTS accesslog (
                             remoteaddr TEXT,
                             remoteuser TEXT,
                             time INTEGER,
@@ -19,11 +20,12 @@ function initDatabase() {
                             referer TEXT,
                             useragent TEXT
                         );`;
-    db.exec(createTable);
+    db.exec(createTable_stmt);
 }
 
+// Insert new row into table
 function insertRow(logdata) {
-    const insert = `INSERT INTO accesslog (
+    const insert_stmt = `INSERT INTO accesslog (
                         remoteaddr,
                         remoteuser,
                         time,
@@ -46,13 +48,13 @@ function insertRow(logdata) {
                         '${logdata.referer}',
                         '${logdata.useragent}'
                     );`;
-    db.exec(insert);
-}
+    db.exec(insert_stmt);
+} 
 
 // Get all rows for download
 function getAll() {
-    const select = db.prepare(`SELECT * FROM accesslog`);
-    return select.all();
+    const select_stmt = db.prepare(`SELECT * FROM accesslog`);
+    return select_stmt.all();
 }
 
 // Export functions

@@ -13,10 +13,6 @@
  * returns: heads
  * 
  */
-
-
-
-
 function coinFlip() {
   if (Math.round(Math.random()) === 0) {
     return "tails";
@@ -43,7 +39,6 @@ function coinFlip() {
       'tails', 'heads'
     ]
  */
-
 function coinFlips(flips) {
   let results = [];
   for (let i=0; i<flips; i++) {
@@ -64,7 +59,6 @@ function coinFlips(flips) {
  * @param {string[]} array 
  * @returns {{ heads: number, tails: number }}
  */
-
 function countFlips(array) {
   let flipResults = {
     "heads": 0,
@@ -90,27 +84,21 @@ function countFlips(array) {
  * example: flipACoin('tails')
  * returns: { call: 'tails', flip: 'heads', result: 'lose' }
  */
-
 function flipACoin(call) {
-  let flip = coinFlip();
-  let outcome = flip === call ? "win" : "lose";
-  let result = {
-    "call": call,
-    "flip": flip,
-    "result": outcome
-  }
-  return result;
-  // if (result === call) {
-  //   return "win";
-  // } else {
-  //   return "lose";
-  // }
+    let flip = coinFlip();
+    let result = flip === call ? "win" : "lose";
+    let final = {
+        "call": call,
+        "flip": flip,
+        "result": result
+    }
+    return final;
 }
 
 
-// /** Export 
-//  * 
-//  * Export all of your named functions
-// */
+/** Export 
+ * 
+ * Export all of your named functions
+*/
 // export { coinFlip, coinFlips, countFlips, flipACoin };
 module.exports = { coinFlip, coinFlips, countFlips, flipACoin };

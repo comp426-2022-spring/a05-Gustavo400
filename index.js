@@ -1,116 +1,34 @@
-// Place your server entry point code here
-// Require Express.js
-const utils = require("./src/utils/utilities.js");
-const coin = require("./src/services/coin.js");
-const database = require("./src/services/database");
-const express = require('express');
-var argv = require('minimist')(process.argv.slice(2));
-const morgan = require("morgan");
-const fs = require("fs");
+// Importing coin, database, and utils modules
+const utils = require("./src/utils/utilities");
+const server = require("./src/services/server");
 
+// Require Minimist, Express, Morgan, and FS
+const minimist = require("minimist");
 
-// Check for --help or --h parameters
-if (argv.help || argv.h) {
-    console.log(utils.help);
+// Capture and parse arguments
+const argv = minimist(process.argv.slice(2));
+const arg_HELP = argv.help || argv.h;
+const arg_PORT = argv.port ? parseInt(argv.port) : 5000;
+const arg_LOG = argv.log !== "false";
+const arg_DEBUG = argv.debug === "true" || argv.debug === true;
+
+// Check for "--help" or "--h" parameters
+if(arg_HELP) {
+    console.log(utils.helpText);
     process.exit(0);
 }
 
-// Start an app server
-const app = express();
-let portNumber = argv.port ? parseInt(argv.port) : 5000;
-const server = app.listen(portNumber, () => {
-    console.log('App listening on port %PORT%'.replace('%PORT%',portNumber))
-    database.initDatabase();
-    console.log("Created database");
-});
+// Serve static HTML
+server.serveHTML("./public");
 
-// Logging to file if "--log=true"
-if(argv.log !== "false") {
-    console.log("LOGGING = TRUE")
-    const accesslog = fs.createWriteStream('./data/log/access.log', { flags: 'a'});
-    app.use(morgan("combined", { stream: accesslog }));
+// Start server on specified port
+server.startListening(arg_PORT);
 
-} else{
-    console.log("LOGGING = FALSE");
-}
+// Logging to access.log if "--log=true" *** LOGGING WITH MORGAN NEEDS TO BE STARTED AS SOON AS SERVER RUNS ***
+server.log(arg_LOG);
 
-// Debug endpoints only if debug flag is true
-if(argv.debug === "true" || argv.debug === true || argv.deeznuts) {
-    console.log("DEBUGGING = TRUE");
-    // /app/error test endpoint
-    app.get('/app/error/', (req,res) => {
-        database.insertRow(utils.fondle(req, res));
-        throw new Error('Error test successful')
-    });
+// Debug endpoints only if "--debug" flag is true
+server.debug(arg_DEBUG);
 
-    app.get('/app/log/access/', (req,res) => {
-        const result = database.getAll();
-        res.statusCode = 200;
-        res.statusMessage = 'OK';
-        res.set({"Content-Type": "text/json"});
-        res.json(result);
-        database.insertRow(utils.fondle(req, res));
-    });
-} else {
-    console.log("DEBUGGING = FALSE");
-}
-
-
-
-
-
-app.get('/app/', (req, res) => {
-    // Respond with status 200
-        res.statusCode = 200;
-    // Respond with status message "OK"
-        res.statusMessage = 'OK';
-        res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
-        res.end(res.statusCode+ ' ' +res.statusMessage)
-
-        //console.log(fondle(req, res));
-        database.insertRow(utils.fondle(req, res));
-});
-
-//One flip
-app.get('/app/flip/', (req, res) => {
-    const result = {"flip" : coin.coinFlip()};
-    res.statusCode = 200;
-    res.statusMessage = 'OK';
-    res.set({"Content-Type": "text/json"});
-    res.json(result);
-
-    database.insertRow(utils.fondle(req, res));
-});
-
-//Multiple flips
-app.get('/app/flips/:number', (req, res) => {
-    const numberOfFlips = parseInt(req.params.number);
-    const raw = coin.coinFlips(numberOfFlips);
-    const summary = coin.countFlips(raw);
-    const result = {"raw" : raw, "summary" : summary};
-    res.statusCode = 200;
-    res.statusMessage = 'OK';
-    res.set({"Content-Type": "text/json"});
-    res.json(result);
-
-    database.insertRow(utils.fondle(req, res));
-});
-
-//Call and flip
-app.get('/app/flip/call/:call', (req, res) => {
-    const call = req.params.call;
-    const result = coin.flipACoin(call);
-    res.statusCode = 200;
-    res.statusMessage = 'OK';
-    res.set({"Content-Type": "text/json"});
-    res.json(result);
-
-    database.insertRow(utils.fondle(req, res));
-});
-
-// Default response for any other request
-app.use(function(req, res){
-    res.status(404).send('404 NOT FOUND')
-
-    database.insertRow(utils.fondle(req, res));
-});
+// Run all endpoints defined in routes
+server.runEndpoints();
