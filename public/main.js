@@ -80,11 +80,11 @@ function multiflip() {
     fetch("/app/flip/coins", postOptions).then((response) => {
         return response.json();
     }).then((result) => {
-        console.log(result);
-        // setTimeout(() => {
-        //     stopCoin(coin, result.flip);
-        //     coinLabel.innerHTML = result.flip.toUpperCase();
-        // }, 500);
+        // console.log(result);
+        const coinList = document.querySelectorAll("#coin-bank .coin-image");
+        setTimeout(() => {
+            const flipResults = result.raw;
+        }, 500);
     });
 
 }
