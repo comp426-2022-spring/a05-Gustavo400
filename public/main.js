@@ -47,6 +47,7 @@ function flip() {
 }
 
 function updateBank() {
+    const coinLabel = document.querySelector("#multi .coin-label");
     const coinHTML = `<img class="coin-image coin-rotate" src="./assets/img/coin.png">`;
     const bank = document.querySelector("#coin-bank");
     const input = document.querySelector("#multi-flip-count");
@@ -64,6 +65,7 @@ function updateBank() {
         coins = coins + coinHTML;
     }
     bank.innerHTML = coins;
+    coinLabel.innerHTML = "HEADS:   0   TAILS:  0";
 
     // console.log(inputValue, max, min);
 }
