@@ -17,6 +17,7 @@ body * {
 .big-input {
   width: 128px;
   text-align: center;
+  margin: 0 1rem;
 }
 
 .big-button {
