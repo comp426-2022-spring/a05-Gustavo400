@@ -34,7 +34,7 @@ function stopCoin(coin, flip) {
 }
 
 function flip() {
-    if(!singleTimeout) {    clearTimeout(singleTimeout);    }
+clearTimeout(singleTimeout);
 
 
     const coin = document.querySelector("#single .coin-image");
