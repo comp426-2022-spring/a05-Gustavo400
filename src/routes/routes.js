@@ -41,6 +41,25 @@ const endpoints = {
             database.insertRow(utils.fondle(req, res));
         });
     },
+
+    // /app/flip/coins
+    flipPost: (app, path) => {
+        app.post(path, (req, res) => {
+            // Get count from body
+            const count = req.body.number;
+            // Flip and count multiple
+            const raw = coin.coinFlips(count);
+            const summary = coin.countFlips(raw);
+            // Collect results
+            const result = {"raw": raw, "summary": summary};
+            res.statusCode = 200;
+            res.statusMessage = "OK";
+            res.set({"Content-Type": "text/json"});
+            res.json(result);
+            database.insertRow(utils.fondle(req, res));
+        });
+    },
+    
     // /app/flip/call/:call Flip and call endpoint
     call: (app, path) => {
         app.get(path, (req, res) => {

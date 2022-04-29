@@ -62,5 +62,10 @@ function updateBank() {
     }
     bank.innerHTML = coins;
 
-    console.log(inputValue, max, min);
+    // console.log(inputValue, max, min);
+}
+
+function multiflip() {
+    const inputValue = parseInt(document.querySelector("#multi-flip-count").value);
+    console.log("Flipping " + inputValue  + " coin(s)");
 }
