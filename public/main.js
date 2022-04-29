@@ -7,6 +7,9 @@
 
 // Guess a flip by clicking either heads or tails button
 
+let singleTimeout = undefined;
+let multiTimeouts = [];
+
 function showPage(pageID) {
     // alert(pageID);
     const pages = document.querySelectorAll(".page");
@@ -31,6 +34,9 @@ function stopCoin(coin, flip) {
 }
 
 function flip() {
+    if(!singleTimeout) {    clearTimeout(singleTimeout);    }
+
+
     const coin = document.querySelector("#single .coin-image");
     const coinLabel = document.querySelector("#single .coin-label");
     rotateCoin(coin);
@@ -39,7 +45,7 @@ function flip() {
     fetch("/app/flip").then((response) => {
         return response.json();
     }).then((result) => {
-        setTimeout(() => {
+        singleTimeout = setTimeout(() => {
             stopCoin(coin, result.flip);
             coinLabel.innerHTML = result.flip.toUpperCase();
         }, 500);
@@ -47,6 +53,8 @@ function flip() {
 }
 
 function updateBank() {
+    multiTimeouts.forEach((timeout) => {    clearTimeout(timeout)   })
+    multiTimeouts = [];
     const coinLabel = document.querySelector("#multi .coin-label");
     const coinHTML = `<img class="coin-image coin-rotate" src="./assets/img/coin.png">`;
     const bank = document.querySelector("#coin-bank");
@@ -71,6 +79,9 @@ function updateBank() {
 }
 
 function multiflip() {
+    multiTimeouts.forEach((timeout) => {    clearTimeout(timeout)   })
+    multiTimeouts = [];
+
     let headsCount = 0;
     let tailsCount = 0;
     const coinList = document.querySelectorAll("#coin-bank .coin-image");
@@ -95,7 +106,7 @@ function multiflip() {
         // console.log(result);
         const flipList = result.raw;
         flipList.forEach((flip, index) => {
-                setTimeout(() => {
+                let timeoutID = setTimeout(() => {
                     stopCoin(coinList[index], flip);
                     if ( flip === "heads") {
                         headsCount++;
@@ -104,6 +115,7 @@ function multiflip() {
                     }
                     coinLabel.innerHTML = `HEADS:   ${headsCount} TAILS:  ${tailsCount}`;
                 }, 100 + (index * 100));
+                multiTimeouts.push(timeoutID);
         });
     });
 }
