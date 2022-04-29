@@ -67,5 +67,26 @@ function updateBank() {
 
 function multiflip() {
     const inputValue = parseInt(document.querySelector("#multi-flip-count").value);
-    console.log("Flipping " + inputValue  + " coin(s)");
+    // console.log("Flipping " + inputValue  + " coin(s)");
+    const postOptions = {
+        "method": "POST", 
+        "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        "body": {
+            "number": inputValue
+        }
+    }
+
+    fetch("/app/flip/coins", postOptions).then((response) => {
+        return response.json();
+    }).then((result) => {
+        console.log(result);
+        // setTimeout(() => {
+        //     stopCoin(coin, result.flip);
+        //     coinLabel.innerHTML = result.flip.toUpperCase();
+        // }, 500);
+    });
+
 }
