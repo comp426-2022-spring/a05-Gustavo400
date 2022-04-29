@@ -53,6 +53,7 @@ function updateBank() {
 
     if ( inputValue < min) {    inputValue = min    };
     if ( inputValue > max) {    inputValue = max    };
+    if ( isNaN(inputValue)) {   inputValue = min  }
     input.value = inputValue;
 
     let coins = "";
