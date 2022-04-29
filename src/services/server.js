@@ -45,6 +45,7 @@ function runEndpoints() {
     routes.endpoints.flips(app, "/app/flips/:count");
     routes.endpoints.flipPost(app, "/app/flip/coins");
     routes.endpoints.call(app, "/app/flip/call/:call");
+    routes.endpoints.callPost(app, "/app/flip/call");
     routes.endpoints.default(app);
 }
 

@@ -73,6 +73,21 @@ const endpoints = {
             database.insertRow(utils.fondle(req, res));
         });        
     },
+
+    // /app/flip/call Flip and call endpoint
+    callPost: (app, path) => {
+        app.post(path, (req, res) => {
+            // Get call from parameter and flip a coin
+            const call = req.body.guess;
+            const result = coin.flipACoin(call);
+            res.statusCode = 200;
+            res.statusMessage = "OK";
+            res.set({"Content-Type": "text/json"});
+            res.json(result);
+            database.insertRow(utils.fondle(req, res));
+        });        
+    },
+
     // Default response for any other request
     default: (app) => {
         app.use(function(req, res) {
