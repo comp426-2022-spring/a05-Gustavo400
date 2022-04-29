@@ -44,6 +44,8 @@ function flip() {
 }
 
 function updateBank() {
+    const coinHTML = `<img class="coin-image coin-rotate" src="./assets/img/coin.png">`;
+    const bank = document.querySelector("#coin-bank");
     const input = document.querySelector("#multi-flip-count");
     const max = parseInt(input.getAttribute("max"));
     const min = parseInt(input.getAttribute("min"));
@@ -51,8 +53,13 @@ function updateBank() {
 
     if ( inputValue < min) {    inputValue = min    };
     if ( inputValue > max) {    inputValue = max    };
-
     input.value = inputValue;
-    
+
+    let coins = "";
+    for ( let i = 0; i < inputValue; i++) {
+        coins = coins + coinHTML;
+    }
+    bank.innerHTML = coins;
+
     console.log(inputValue, max, min);
 }
