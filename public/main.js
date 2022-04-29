@@ -16,14 +16,17 @@ function showPage(pageID) {
     // console.log(pages);
 }
 
+function makeCoinURL(flip) {
+    return `./assets/img/${flip}.png`
+}
+
 function rotateCoin(coin) {
-    coin.setAttribute("src", "./assets/img/coin.png");
+    coin.setAttribute("src", makeCoinURL("coin"));
     coin.classList.add("coin-rotate");
 }
 
 function stopCoin(coin, flip) {
-    const newImage = `./assets/img/${flip}.png`;
-    coin.setAttribute("src", newImage);
+    coin.setAttribute("src", makeCoinURL(flip));
     coin.classList.remove("coin-rotate");
 }
 
@@ -66,6 +69,7 @@ function updateBank() {
 }
 
 function multiflip() {
+    const coinList = document.querySelectorAll("#coin-bank .coin-image");
     const inputValue = parseInt(document.querySelector("#multi-flip-count").value);
     // console.log("Flipping " + inputValue  + " coin(s)");
     const postOptions = {
@@ -77,14 +81,17 @@ function multiflip() {
         "body": JSON.stringify({    "number": inputValue   })
     }
 
+    coinList.forEach((coin) => {    rotateCoin(coin);    })
+
     fetch("/app/flip/coins", postOptions).then((response) => {
         return response.json();
     }).then((result) => {
         // console.log(result);
-        const coinList = document.querySelectorAll("#coin-bank .coin-image");
-        setTimeout(() => {
-            const flipResults = result.raw;
-        }, 500);
+        const flipList = result.raw;
+        flipList.forEach((flip, index) => {
+                setTimeout(() => {
+                    stopCoin(coinList[index], flip);
+                }, 100 + (index * 100));
+        });
     });
-
 }
