@@ -122,3 +122,11 @@ function multiflip() {
         });
     });
 }
+
+function updateCall(call) {
+    console.log("My call is " + call);
+    const coinButtons = document.querySelectorAll(".coin-button");
+    const activeButton = document.querySelector(`.coin-button.${call}`);
+    coinButtons.forEach((button) => {   button.classList.remove("active")   })
+    activeButton.classList.add("active");
+}
