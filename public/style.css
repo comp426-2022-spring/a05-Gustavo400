@@ -67,7 +67,8 @@ body * {
   width: 73px;
   vertical-align: top;
   margin: 0 10px;
-  background: url("./assets/img/heads.png") center center / 100% 100%;
+  background: url("./assets/img/heads.png") center center / 90% 90% no-repeat;
+  border-radius: 99999999px;
 }
 
 .coin-button.tails {
@@ -76,14 +77,21 @@ body * {
   width: 73px;
   vertical-align: top;
   margin: 0 10px;
-  background: url("./assets/img/tails.png") center center / 100% 100%;
+  background: url("./assets/img/tails.png") center center / 90% 90% no-repeat;
+  border-radius: 99999999px;
+}
+
+.coin-button.active {
+  box-shadow: 0 0 0 4px #7BAFD4;
+  font-weight: bolder;
+  animation: rotate 5s infinite linear;
 }
 
 @keyframes rotate {
   from {
-    transform: rotateY(0deg);
+    transform: rotateY(0deg) rotateX(0deg);
   }
   to {
-    transform: rotateY(360deg);
+    transform: rotateY(360deg) rotateX(360deg);
   }
 }
