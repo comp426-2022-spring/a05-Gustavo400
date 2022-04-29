@@ -1,15 +1,21 @@
-div.hidden {
+.hidden {
   display: none;
 }
 
-div.active {
-  border: 5px solid red;
+.coin-image {
+  height: 800px;
+  width: 800px;
 }
 
-img.bigcoin {
-  width: 50px;
+.coin-rotate {
+  animation: rotate 0.5s infinite linear;
 }
 
-img.smallcoin {
-  width: 50px;
+@keyframes rotate {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
