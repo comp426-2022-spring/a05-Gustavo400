@@ -50,6 +50,10 @@ body * {
   height: 64px;
 }
 
+#coin-bank .coin-rotate {
+  animation: rotate 0.25s infinite linear;
+}
+
 #coin-bank {
   max-width: calc(64px * 20);
   margin: 0 auto;
