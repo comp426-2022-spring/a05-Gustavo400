@@ -20,6 +20,7 @@ function startListening(port) {
         console.log(`App listening on port ${port}`);
         console.log("Created database");
     });
+    app.use(express.json());
 }
 
 function log(flag) {

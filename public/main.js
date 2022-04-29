@@ -74,9 +74,7 @@ function multiflip() {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
-        "body": {
-            "number": inputValue
-        }
+        "body": JSON.stringify({    "number": inputValue   })
     }
 
     fetch("/app/flip/coins", postOptions).then((response) => {
