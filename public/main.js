@@ -29,6 +29,7 @@ function stopCoin(coin, flip) {
 
 function flip() {
     const coin = document.querySelector("#single .coin-image");
+    const coinLabel = document.querySelector("#single .coin-label");
     rotateCoin(coin);
 
     fetch("/app/flip").then((response) => {
@@ -38,6 +39,7 @@ function flip() {
         const flip = result.flip;
         setTimeout(() => {
             stopCoin(coin, result.flip);
+            coinLabel.innerHTML = result.flip.toUpperCase();
         }, 500);
     });
 }

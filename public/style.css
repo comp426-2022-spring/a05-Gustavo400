@@ -1,3 +1,7 @@
+body * {
+  font-family: 'Comic Sans MS', sans-serif !important;
+}
+
 .hidden {
   display: none;
 }
@@ -22,6 +26,10 @@
 
 .coin-rotate {
   animation: rotate 0.5s infinite linear;
+}
+
+.coin-label {
+  font-size: 3rem;
 }
 
 @keyframes rotate {
