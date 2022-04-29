@@ -42,3 +42,17 @@ function flip() {
         }, 500);
     });
 }
+
+function updateBank() {
+    const input = document.querySelector("#multi-flip-count");
+    const max = parseInt(input.getAttribute("max"));
+    const min = parseInt(input.getAttribute("min"));
+    let inputValue = parseInt(input.value);
+
+    if ( inputValue < min) {    inputValue = min    };
+    if ( inputValue > max) {    inputValue = max    };
+
+    input.value = inputValue;
+    
+    console.log(inputValue, max, min);
+}
