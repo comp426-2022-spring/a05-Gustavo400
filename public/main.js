@@ -9,6 +9,7 @@
 
 let singleTimeout = undefined;
 let multiTimeouts = [];
+let myCall = "heads";
 
 function showPage(pageID) {
     // alert(pageID);
@@ -129,4 +130,9 @@ function updateCall(call) {
     const activeButton = document.querySelector(`.coin-button.${call}`);
     coinButtons.forEach((button) => {   button.classList.remove("active")   })
     activeButton.classList.add("active");
+    myCall = call;
+}
+
+function guessFlip() {
+    console.log(myCall);
 }
