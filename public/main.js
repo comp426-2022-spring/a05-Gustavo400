@@ -17,9 +17,16 @@ function showPage(pageID) {
 }
 
 function flip() {
+    const coin = document.querySelector("#single .coin-image");
+    coin.classList.add("coin-rotate");
+    
     fetch("/app/flip").then((response) => {
         return response.json();
     }).then((result) => {
         console.log(result);
+        const flip = result.flip;
+        const newImage = `./assets/img/${flip}.png`;
+        coin.setAttribute("src", newImage);
+        coin.classList.remove("coin-rotate");
     });
 }
