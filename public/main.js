@@ -135,8 +135,12 @@ function updateCall(call) {
 }
 
 function guessFlip() {
+    clearTimeout(guessTimeout);
+
+    const coinLabel = document.querySelector("#guess .coin-label");
     const coin = document.querySelector("#guess .coin-image");
     rotateCoin(coin);
+    coinLabel.innerHTML = "What's it gonna be?"
 
     const postOptions = {
         "method": "POST", 
@@ -152,7 +156,8 @@ function guessFlip() {
     }).then((result) => {
         guessTimeout = setTimeout(() => {
             stopCoin(coin, result.flip);
-        }, 500)
+            coinLabel.innerHTML = result.result === "win" ? "Beginner's luck..." : "Better luck next time! >:]"
+        }, 1000)
         console.log(result);
         // const flipList = result.raw;
         // flipList.forEach((flip, index) => {
