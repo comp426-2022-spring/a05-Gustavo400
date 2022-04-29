@@ -19,6 +19,11 @@ function showPage(pageID) {
     // console.log(pages);
 }
 
+function clearMultiTimeouts() {
+    multiTimeouts.forEach((timeout) => {    clearTimeout(timeout)   })
+    multiTimeouts = [];
+}
+
 function makeCoinURL(flip) {
     return `./assets/img/${flip}.png`
 }
@@ -53,8 +58,7 @@ clearTimeout(singleTimeout);
 }
 
 function updateBank() {
-    multiTimeouts.forEach((timeout) => {    clearTimeout(timeout)   })
-    multiTimeouts = [];
+    clearMultiTimeouts();
     const coinLabel = document.querySelector("#multi .coin-label");
     const coinHTML = `<img class="coin-image coin-rotate" src="./assets/img/coin.png">`;
     const bank = document.querySelector("#coin-bank");
@@ -79,8 +83,7 @@ function updateBank() {
 }
 
 function multiflip() {
-    multiTimeouts.forEach((timeout) => {    clearTimeout(timeout)   })
-    multiTimeouts = [];
+    clearMultiTimeouts();
 
     let headsCount = 0;
     let tailsCount = 0;
