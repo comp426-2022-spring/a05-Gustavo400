@@ -69,6 +69,8 @@ function updateBank() {
 }
 
 function multiflip() {
+    let headsCount = 0;
+    let tailsCount = 0;
     const coinList = document.querySelectorAll("#coin-bank .coin-image");
     const coinLabel = document.querySelector("#multi .coin-label");
     const inputValue = parseInt(document.querySelector("#multi-flip-count").value);
@@ -83,17 +85,22 @@ function multiflip() {
     }
 
     coinList.forEach((coin) => {    rotateCoin(coin);    })
-    coinLabel.innerHTML = "HEADS:   ??? TAILS:  ???";
+    coinLabel.innerHTML = "HEADS:   0 TAILS:  0";
 
     fetch("/app/flip/coins", postOptions).then((response) => {
         return response.json();
     }).then((result) => {
         // console.log(result);
-        coinLabel.innerHTML = `HEADS:   ${result.summary.heads} TAILS:  ${result.summary.tails}`;
         const flipList = result.raw;
         flipList.forEach((flip, index) => {
                 setTimeout(() => {
                     stopCoin(coinList[index], flip);
+                    if ( flip === "heads") {
+                        headsCount++;
+                    } else {
+                        tailsCount++;
+                    }
+                    coinLabel.innerHTML = `HEADS:   ${headsCount} TAILS:  ${tailsCount}`;
                 }, 100 + (index * 100));
         });
     });
