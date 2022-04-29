@@ -30,7 +30,8 @@ body * {
 }
 
 .play-a-game {
-  height: 600px
+  height: 600px;
+  border-radius: 99999999px;
 }
 
 .coin-image {
