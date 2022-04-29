@@ -29,6 +29,10 @@ body * {
   background-color: #5f87a3;
 }
 
+.play-a-game {
+  height: 600px
+}
+
 .coin-image {
   height: 400px;
 }
