@@ -12,6 +12,10 @@
   background-color:#7BAFD4;           /* Official carolina blue hex code */
 }
 
+.big-button:active {
+  background-color: #5f87a3;
+}
+
 .coin-image {
   height: 400px;
 }
