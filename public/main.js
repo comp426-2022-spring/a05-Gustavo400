@@ -70,6 +70,7 @@ function updateBank() {
 
 function multiflip() {
     const coinList = document.querySelectorAll("#coin-bank .coin-image");
+    const coinLabel = document.querySelector("#multi .coin-label");
     const inputValue = parseInt(document.querySelector("#multi-flip-count").value);
     // console.log("Flipping " + inputValue  + " coin(s)");
     const postOptions = {
@@ -82,11 +83,13 @@ function multiflip() {
     }
 
     coinList.forEach((coin) => {    rotateCoin(coin);    })
+    coinLabel.innerHTML = "HEADS:   ??? TAILS:  ???";
 
     fetch("/app/flip/coins", postOptions).then((response) => {
         return response.json();
     }).then((result) => {
         // console.log(result);
+        coinLabel.innerHTML = `HEADS:   ${result.summary.heads} TAILS:  ${result.summary.tails}`;
         const flipList = result.raw;
         flipList.forEach((flip, index) => {
                 setTimeout(() => {
