@@ -2,9 +2,12 @@
   display: none;
 }
 
+.center-align {
+  text-align: center;
+}
+
 .coin-image {
-  height: 800px;
-  width: 800px;
+  height: 400px;
 }
 
 .coin-rotate {
