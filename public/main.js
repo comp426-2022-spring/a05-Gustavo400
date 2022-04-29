@@ -7,3 +7,6 @@
 
 // Guess a flip by clicking either heads or tails button
 
+function showPage(pageID) {
+    alert(pageID);
+}

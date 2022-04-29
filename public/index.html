@@ -27,12 +27,12 @@
     </head>
     <body>
         <nav>
-            <button id="homenav">Home</button>
-            <button id="singlenav">Flip one coin</button>
-            <button id="multinav">Flip multiple coins</button>
-            <button id="guessnav">Guess the result</button>
+            <button id="homenav" onclick="showPage('home')">Home</button>
+            <button id="singlenav" onclick="showPage('single')">Flip one coin</button>
+            <button id="multinav" onclick="showPage('multi')">Flip multiple coins</button>
+            <button id="guessnav" onclick="showPage('guess')">Guess the result</button>
         </nav>
-        <div id="home">
+        <div id="home" class="page">
             <h1>
                 Welcome to the coin house!
             </h1>
@@ -40,17 +40,17 @@
                 DO YOU WANNA PLAY A GAME?
             </p>
         </div>    
-        <div id="single" class="hidden">
+        <div id="single" class="hidden page">
             <h1>
                 Flip a coin!
             </h1>
         </div>
-        <div id="multi" class="hidden">
+        <div id="multi" class="hidden page">
             <h1>
                 Flip multiple coins!
             </h1>
         </div>
-        <div id="guess" class="hidden">
+        <div id="guess" class="hidden page">
             <h1>
                 Call it! Heads or Tails?
             </h1>
