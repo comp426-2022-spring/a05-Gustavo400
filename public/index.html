@@ -58,11 +58,15 @@
             <h1>
                 Flip multiple coins!
             </h1>
-            <label class="big-label">Number of Coins to flip:</label>
-            <input class="big-input" type="number" value="3" max="420" min="1"/>
-            <button class="big-button">FLIP!</button>
-            <br/>
-            <br/>
+            <div class="center-align">
+                <label class="big-label">Number of Coins to flip:</label>
+                <input class="big-input" type="number" value="3" max="420" min="1" onchange="updateBank()"/>
+                <button class="big-button">FLIP!</button>
+                <br/>
+                <div id="coin-bank">
+                    
+                </div>
+            </div>
 
         </div>
         <div id="guess" class="hidden page">

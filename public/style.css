@@ -40,6 +40,10 @@ body * {
   font-size: 3rem;
 }
 
+#coin-bank .coin-image {
+  height: 64px;
+}
+
 @keyframes rotate {
   from {
     transform: rotateY(0deg);
