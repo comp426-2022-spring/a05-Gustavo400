@@ -10,8 +10,16 @@ body * {
   text-align: center;
 }
 
-.big-button {
+.big-button, .big-label, .big-input {
   font-size: 3rem;
+}
+
+.big-input {
+  width: 128px;
+  text-align: center;
+}
+
+.big-button {
   border-radius: 10px;
   background-color:#7BAFD4;           /* Official carolina blue hex code */
 }
