@@ -60,6 +60,25 @@ body * {
   font-size: 0;
 }
 
+.coin-button.heads {
+  /* background-color: #7BAFD4; */
+  border: none;
+  height: 73px;
+  width: 73px;
+  vertical-align: top;
+  margin: 0 10px;
+  background: url("./assets/img/heads.png") center center / 100% 100%;
+}
+
+.coin-button.tails {
+  border: none;
+  height: 73px;
+  width: 73px;
+  vertical-align: top;
+  margin: 0 10px;
+  background: url("./assets/img/tails.png") center center / 100% 100%;
+}
+
 @keyframes rotate {
   from {
     transform: rotateY(0deg);
