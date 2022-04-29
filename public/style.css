@@ -1,3 +1,8 @@
+/* body {
+  background: url("./assets/img/saloon.gif");
+
+} */
+
 body * {
   font-family: 'Comic Sans MS', sans-serif !important;
 }
@@ -84,7 +89,7 @@ body * {
 .coin-button.active {
   box-shadow: 0 0 0 4px #7BAFD4;
   font-weight: bolder;
-  animation: throbbing 5s infinite;
+  animation: throbbing 2s infinite;
 }
 
 @keyframes rotate {
@@ -100,7 +105,7 @@ body * {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.5);
+    transform: scale(1.2);
   }
   100% {
     transform: scale(1);
