@@ -16,20 +16,28 @@ function showPage(pageID) {
     // console.log(pages);
 }
 
+function rotateCoin(coin) {
+    coin.setAttribute("src", "./assets/img/coin.png");
+    coin.classList.add("coin-rotate");
+}
+
+function stopCoin(coin, flip) {
+    const newImage = `./assets/img/${flip}.png`;
+    coin.setAttribute("src", newImage);
+    coin.classList.remove("coin-rotate");
+}
+
 function flip() {
     const coin = document.querySelector("#single .coin-image");
-    coin.classList.add("coin-rotate");
+    rotateCoin(coin);
 
     fetch("/app/flip").then((response) => {
         return response.json();
     }).then((result) => {
         console.log(result);
         const flip = result.flip;
-        const newImage = `./assets/img/${flip}.png`;
         setTimeout(() => {
-            coin.setAttribute("src", newImage);
-            coin.classList.remove("coin-rotate");
-        }, 500)
-
+            stopCoin(coin, result.flip);
+        }, 500);
     });
 }
