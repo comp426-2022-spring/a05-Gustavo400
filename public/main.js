@@ -31,12 +31,11 @@ function flip() {
     const coin = document.querySelector("#single .coin-image");
     const coinLabel = document.querySelector("#single .coin-label");
     rotateCoin(coin);
+    coinLabel.innerHTML = "???";
 
     fetch("/app/flip").then((response) => {
         return response.json();
     }).then((result) => {
-        console.log(result);
-        const flip = result.flip;
         setTimeout(() => {
             stopCoin(coin, result.flip);
             coinLabel.innerHTML = result.flip.toUpperCase();
