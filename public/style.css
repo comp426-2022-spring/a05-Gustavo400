@@ -49,6 +49,12 @@ body * {
   height: 64px;
 }
 
+#coin-bank {
+  max-width: calc(64px * 20);
+  margin: 0 auto;
+  font-size: 0;
+}
+
 @keyframes rotate {
   from {
     transform: rotateY(0deg);
