@@ -15,3 +15,11 @@ function showPage(pageID) {
     activePage.classList.remove("hidden");
     // console.log(pages);
 }
+
+function flip() {
+    fetch("/app/flip").then((response) => {
+        return response.json();
+    }).then((result) => {
+        console.log(result);
+    });
+}
