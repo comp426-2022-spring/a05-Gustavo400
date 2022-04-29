@@ -8,6 +8,7 @@
 // Guess a flip by clicking either heads or tails button
 
 let singleTimeout = undefined;
+let guessTimeout = undefined;
 let multiTimeouts = [];
 let myCall = "heads";
 
@@ -134,5 +135,36 @@ function updateCall(call) {
 }
 
 function guessFlip() {
-    console.log(myCall);
+    const coin = document.querySelector("#guess .coin-image");
+    rotateCoin(coin);
+
+    const postOptions = {
+        "method": "POST", 
+        "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        "body": JSON.stringify({    "guess": myCall   })
+    }
+
+    fetch("/app/flip/call", postOptions).then((response) => {
+        return response.json();
+    }).then((result) => {
+        guessTimeout = setTimeout(() => {
+            stopCoin(coin, result.flip);
+        }, 500)
+        console.log(result);
+        // const flipList = result.raw;
+        // flipList.forEach((flip, index) => {
+        //         let timeoutID = setTimeout(() => {
+        //             stopCoin(coinList[index], flip);
+        //             if ( flip === "heads") {
+        //                 headsCount++;
+        //             } else {
+        //                 tailsCount++;
+        //             }
+        //             coinLabel.innerHTML = `HEADS:   ${headsCount} TAILS:  ${tailsCount}`;
+        //         }, 100 + (index * 100));
+        //         multiTimeouts.push(timeoutID);
+        });
 }
