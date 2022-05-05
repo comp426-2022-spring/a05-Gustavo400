@@ -1,15 +1,113 @@
-div.hidden {
+/* body {
+  background: url("./assets/img/saloon.gif");
+
+} */
+
+body * {
+  font-family: 'Comic Sans MS', sans-serif !important;
+}
+
+.hidden {
   display: none;
 }
 
-div.active {
-  border: 5px solid red;
+.center-align {
+  text-align: center;
 }
 
-img.bigcoin {
-  width: 50px;
+.big-button, .big-label, .big-input {
+  font-size: 3rem;
 }
 
-img.smallcoin {
-  width: 50px;
+.big-input {
+  width: 128px;
+  text-align: center;
+  margin: 0 1rem;
+}
+
+.big-button {
+  border-radius: 10px;
+  background-color:#7BAFD4;           /* Official carolina blue hex code */
+}
+
+.big-button:active {
+  background-color: #5f87a3;
+}
+
+.play-a-game {
+  height: 600px;
+  border-radius: 99999999px;
+}
+
+.coin-image {
+  height: 400px;
+}
+
+.coin-rotate {
+  animation: rotate 0.5s infinite linear;
+}
+
+.coin-label {
+  font-size: 3rem;
+}
+
+#coin-bank .coin-image {
+  height: 64px;
+}
+
+#coin-bank .coin-rotate {
+  animation: rotate 0.25s infinite linear;
+}
+
+#coin-bank {
+  max-width: calc(64px * 20);
+  margin: 0 auto;
+  font-size: 0;
+}
+
+.coin-button.heads {
+  /* background-color: #7BAFD4; */
+  border: none;
+  height: 73px;
+  width: 73px;
+  vertical-align: top;
+  margin: 0 10px;
+  background: url("./assets/img/heads.png") center center / 90% 90% no-repeat;
+  border-radius: 99999999px;
+}
+
+.coin-button.tails {
+  border: none;
+  height: 73px;
+  width: 73px;
+  vertical-align: top;
+  margin: 0 10px;
+  background: url("./assets/img/tails.png") center center / 90% 90% no-repeat;
+  border-radius: 99999999px;
+}
+
+.coin-button.active {
+  box-shadow: 0 0 0 4px #7BAFD4;
+  font-weight: bolder;
+  animation: throbbing 2s infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateY(0deg) rotateX(0deg);
+  }
+  to {
+    transform: rotateY(360deg) rotateX(360deg);
+  }
+}
+@keyframes throbbing {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
